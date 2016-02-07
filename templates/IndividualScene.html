@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Play Title: {{ play.title }}</h1>
+
+<h2>Act: {{ act_no }} - Scene: {{ scene_no }}</h2>
+
+
+<p>Previous: <a href="/plays/{{ play.id }}/acts/{{ actForPrev }}/scenes/{{ sceneForPrev }}">{{ prevSceneName }} + test</a> || Next: <a href="/plays/{{ play.id }}/acts/{{ actForNext }}/scenes/{{ sceneForNext }}">{{ nextSceneName }}+ test</a></p>
+
+<p>Setting: {{ play.acts[act_no - 1].scenes[scene_no - 1].title }}</p>
+
+
+
+<ul>
+    {% for block in play.acts[act_no - 1].scenes[scene_no - 1].blocks %}
+        <li>{{ block.speaker }} :
+            <ul>
+            {% for line in block.lines %}
+                <li>{{ line }}</li>
+            {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
