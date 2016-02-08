@@ -11,7 +11,7 @@
 <h2>Act: {{ act_no }} - Scene: {{ scene_no }}</h2>
 
 
-<p>Previous: <a href="/plays/{{ play.id }}/acts/{{ actForPrev }}/scenes/{{ sceneForPrev }}">{{ prevSceneName }} + test</a> || Next: <a href="/plays/{{ play.id }}/acts/{{ actForNext }}/scenes/{{ sceneForNext }}">{{ nextSceneName }}+ test</a></p>
+<p>Previous: <a href="/plays/{{ play.id }}/acts/{{ actForPrev }}/scenes/{{ sceneForPrev }}">{{ prevSceneName }}</a>     Next: <a href="/plays/{{ play.id }}/acts/{{ actForNext }}/scenes/{{ sceneForNext }}">{{ nextSceneName }}</a></p>
 
 <p>Setting: {{ play.acts[act_no - 1].scenes[scene_no - 1].title }}</p>
 
@@ -19,13 +19,21 @@
 
 <ul>
     {% for block in play.acts[act_no - 1].scenes[scene_no - 1].blocks %}
-        <li>{{ block.speaker }} :
-            <ul>
-            {% for line in block.lines %}
-                <li>{{ line }}</li>
-            {% endfor %}
-            </ul>
-        </li>
+        <div>
+            <li>{{ block.speaker }} :
+                <ul>
+                {% for line in block.lines %}
+                    <div>
+                        {% if line[0] == "[" %}
+                            <i>{{ line|replace("[", "")|replace("]","") }}</i>
+                        {% else %}
+                            {{ line }}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                </ul>
+            </li>
+        </div>
     {% endfor %}
 </ul>
 
